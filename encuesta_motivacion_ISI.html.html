@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Encuesta: La Motivación – ISI UNAN-León CUR Jinotega</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0C447C;
+  --blue: #185FA5;
+  --blue-light: #E6F1FB;
+  --blue-mid: #B5D4F4;
+  --teal: #0F6E56;
+  --teal-light: #E1F5EE;
+  --amber: #BA7517;
+  --amber-light: #FAEEDA;
+  --coral: #993C1D;
+  --coral-light: #FAECE7;
+  --bg: #f7f9fc;
+  --card: #ffffff;
+  --text: #1a2332;
+  --muted: #5a6a7e;
+  --border: #dce4ef;
+  --ff: 'Sora', sans-serif;
+  --fs: 'Lora', serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--ff);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(150deg, var(--navy) 0%, #0d2b56 60%, var(--teal) 100%);
+  padding: 2.5rem 1.5rem 3.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  top: -80px; right: -80px;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  bottom: -60px; left: -40px;
+}
+.inst-badge {
+  display: inline-block;
+  background: rgba(181,212,244,0.15);
+  border: 1px solid rgba(181,212,244,0.35);
+  color: #B5D4F4;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: 100px;
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+}
+.header h1 {
+  font-family: var(--fs);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+.header h1 em {
+  font-style: italic;
+  color: #FAC775;
+}
+.header p {
+  color: rgba(255,255,255,0.65);
+  font-size: 0.88rem;
+  font-weight: 300;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+  position: relative;
+}
+
+/* PROGRESS */
+.progress-wrap {
+  background: #e8eef6;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.progress-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  white-space: nowrap;
+  font-weight: 500;
+}
+.progress-bar-bg {
+  flex: 1;
+  height: 6px;
+  background: var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--teal));
+  border-radius: 100px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+.progress-pct {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--navy);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* MAIN */
+.main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* SECTION HEADER */
+.section-header {
+  margin: 2rem 0 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--blue-light);
+}
+.section-header .tag {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--blue);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.section-header h2 {
+  font-family: var(--fs);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.q-card:focus-within {
+  border-color: #85B7EB;
+  box-shadow: 0 0 0 3px rgba(24,95,165,0.08);
+}
+.q-num {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--blue);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.q-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 1.1rem;
+}
+.q-text .note {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+/* RADIO / CHECKBOX OPTIONS */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.4;
+  user-select: none;
+}
+.option-label:hover {
+  background: var(--blue-light);
+  border-color: #85B7EB;
+}
+.option-label input[type="radio"],
+.option-label input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  min-width: 18px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  position: relative;
+}
+.option-label input[type="checkbox"] {
+  border-radius: 5px;
+}
+.option-label input[type="radio"]:checked,
+.option-label input[type="checkbox"]:checked {
+  border-color: var(--blue);
+  background: var(--blue);
+}
+.option-label input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  width: 7px; height: 7px;
+  background: #fff;
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+.option-label input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  color: #fff;
+  font-size: 11px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+}
+.option-label:has(input:checked) {
+  background: var(--blue-light);
+  border-color: var(--blue);
+}
+
+/* SCALE */
+.scale-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--muted);
+  padding: 0 2px;
+}
+.scale-btns {
+  display: flex;
+  gap: 6px;
+}
+.scale-btn {
+  flex: 1;
+  padding: 10px 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-family: var(--ff);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  text-align: center;
+}
+.scale-btn:hover { background: var(--blue-light); border-color: #85B7EB; color: var(--navy); }
+.scale-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+/* TEXTAREA */
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-family: var(--ff);
+  font-size: 0.88rem;
+  color: var(--text);
+  background: #fff;
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.6;
+  transition: border-color 0.2s;
+  outline: none;
+}
+textarea:focus { border-color: #85B7EB; box-shadow: 0 0 0 3px rgba(24,95,165,0.08); }
+textarea::placeholder { color: #aab3c0; }
+
+/* SELECT */
+select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-family: var(--ff);
+  font-size: 0.88rem;
+  color: var(--text);
+  background: #fff;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%235a6a7e' stroke-width='1.5' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+select:focus { border-color: #85B7EB; box-shadow: 0 0 0 3px rgba(24,95,165,0.08); }
+
+/* REQUIRED */
+.req { color: #D85A30; margin-left: 3px; }
+
+/* SUBMIT */
+.submit-area {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+.btn-submit {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 3rem;
+  font-family: var(--ff);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: opacity 0.2s, transform 0.15s;
+  width: 100%;
+  max-width: 340px;
+}
+.btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-submit:active { transform: translateY(0); }
+
+/* SUCCESS */
+.success-screen {
+  display: none;
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+.success-icon {
+  width: 80px; height: 80px;
+  background: var(--teal-light);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2.2rem;
+}
+.success-screen h2 {
+  font-family: var(--fs);
+  font-size: 1.6rem;
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+}
+.success-screen p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ERROR */
+.q-card.error { border-color: #D85A30; }
+.q-card.error .q-num { color: #D85A30; }
+.error-msg {
+  font-size: 0.78rem;
+  color: #993C1D;
+  margin-top: 8px;
+  display: none;
+}
+.q-card.error .error-msg { display: block; }
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+}
+
+/* INFO PILL */
+.info-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--blue-light);
+  color: var(--navy);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .q-card { padding: 1.25rem 1rem; }
+  .scale-btn { font-size: 0.8rem; padding: 9px 2px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="inst-badge">UNAN-León · CUR Jinotega · ISI</div>
+  <h1>Encuesta sobre<br><em>La Motivación</em></h1>
+  <p>Investigación de campo — Administración General · Junio 2026<br>Ingeniería en Sistemas de Información</p>
+</div>
+
+<!-- PROGRESO -->
+<div class="progress-wrap">
+  <span class="progress-label">Progreso</span>
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+  <span class="progress-pct" id="progressPct">0%</span>
+</div>
+
+<!-- FORMULARIO -->
+<div class="main" id="formSection">
+  <form id="surveyForm" novalidate>
+
+    <!-- SECCIÓN 1: DATOS GENERALES -->
+    <div class="section-header">
+      <div class="tag">Sección 1</div>
+      <h2>Datos generales</h2>
+    </div>
+
+    <div class="q-card" data-required="true" id="q1-card">
+      <div class="q-num">Pregunta 1 <span class="req">*</span></div>
+      <div class="q-text">¿Cuál es tu sexo?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q1" value="femenino"> Femenino</label>
+        <label class="option-label"><input type="radio" name="q1" value="masculino"> Masculino</label>
+        <label class="option-label"><input type="radio" name="q1" value="no_indica"> Prefiero no indicarlo</label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <div class="q-card" data-required="true" id="q2-card">
+      <div class="q-num">Pregunta 2 <span class="req">*</span></div>
+      <div class="q-text">¿Qué año de la carrera cursas actualmente?</div>
+      <select name="q2" id="q2">
+        <option value="">— Selecciona —</option>
+        <option value="1">1er año</option>
+        <option value="2">2do año</option>
+        <option value="3">3er año</option>
+        <option value="4">4to año</option>
+        <option value="5">5to año</option>
+      </select>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <div class="q-card" data-required="true" id="q3-card">
+      <div class="q-num">Pregunta 3 <span class="req">*</span></div>
+      <div class="q-text">¿Trabajas actualmente además de estudiar?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q3" value="si_tiempo_completo"> Sí, a tiempo completo</label>
+        <label class="option-label"><input type="radio" name="q3" value="si_tiempo_parcial"> Sí, a tiempo parcial</label>
+        <label class="option-label"><input type="radio" name="q3" value="no"> No, solo estudio</label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <!-- SECCIÓN 2: MOTIVACIÓN PARA ESTUDIAR -->
+    <div class="section-header">
+      <div class="tag">Sección 2</div>
+      <h2>Motivación para estudiar</h2>
+    </div>
+
+    <div class="q-card" data-required="true" id="q4-card">
+      <div class="q-num">Pregunta 4 <span class="req">*</span></div>
+      <div class="q-text">¿Cuál es tu principal motivación para estudiar Ingeniería en Sistemas de Información?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q4" value="empleo"> Obtener un buen empleo</label>
+        <label class="option-label"><input type="radio" name="q4" value="desarrollo"> Desarrollo profesional y personal</label>
+        <label class="option-label"><input type="radio" name="q4" value="economia"> Mejorar mi situación económica</label>
+        <label class="option-label"><input type="radio" name="q4" value="gusto"> Me apasiona la tecnología</label>
+        <label class="option-label"><input type="radio" name="q4" value="familia"> Expectativa familiar o social</label>
+        <label class="option-label"><input type="radio" name="q4" value="otro"> Otra razón</label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <div class="q-card" data-required="true" id="q5-card">
+      <div class="q-num">Pregunta 5 <span class="req">*</span></div>
+      <div class="q-text">¿Qué tipo de motivación consideras que predomina en ti actualmente?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q5" value="intrinseca"> Intrínseca (interés personal, curiosidad, satisfacción interna)</label>
+        <label class="option-label"><input type="radio" name="q5" value="extrinseca"> Extrínseca (recompensas, notas, trabajo, reconocimiento externo)</label>
+        <label class="option-label"><input type="radio" name="q5" value="mixta"> Mixta (ambas en igual medida)</label>
+        <label class="option-label"><input type="radio" name="q5" value="no_sabe"> No lo tengo claro</label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <div class="q-card" id="q6-card">
+      <div class="q-num">Pregunta 6</div>
+      <div class="q-text">En una escala del 1 al 5, ¿cuán motivado/a te sientes actualmente para continuar tus estudios?
+        <span class="note">1 = Nada motivado/a &nbsp;|&nbsp; 5 = Muy motivado/a</span>
+      </div>
+      <div class="scale-wrap">
+        <div class="scale-labels"><span>Nada</span><span>Muy motivado/a</span></div>
+        <div class="scale-btns" id="scale-q6">
+          <button type="button" class="scale-btn" data-val="1">1</button>
+          <button type="button" class="scale-btn" data-val="2">2</button>
+          <button type="button" class="scale-btn" data-val="3">3</button>
+          <button type="button" class="scale-btn" data-val="4">4</button>
+          <button type="button" class="scale-btn" data-val="5">5</button>
+        </div>
+      </div>
+      <input type="hidden" name="q6" id="q6-val">
+    </div>
+
+    <!-- SECCIÓN 3: TEORÍAS DE MOTIVACIÓN -->
+    <div class="section-header">
+      <div class="tag">Sección 3</div>
+      <h2>Teorías de la motivación</h2>
+    </div>
+
+    <div class="q-card" data-required="true" id="q7-card">
+      <div class="q-num">Pregunta 7 <span class="req">*</span></div>
+      <div class="q-text">Según la Teoría de Maslow, ¿en qué nivel de necesidades consideras que te encuentras principalmente?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q7" value="fisiologicas"> Fisiológicas (alimentación, descanso, salud)</label>
+        <label class="option-label"><input type="radio" name="q7" value="seguridad"> Seguridad (estabilidad económica, empleo)</label>
+        <label class="option-label"><input type="radio" name="q7" value="sociales"> Sociales / Pertenencia (amistades, familia, compañeros)</label>
+        <label class="option-label"><input type="radio" name="q7" value="estima"> Estima (reconocimiento, logros, autoestima)</label>
+        <label class="option-label"><input type="radio" name="q7" value="autorrealizacion"> Autorrealización (desarrollar mi máximo potencial)</label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <div class="q-card" data-required="true" id="q8-card">
+      <div class="q-num">Pregunta 8 <span class="req">*</span></div>
+      <div class="q-text">Según la Teoría de Herzberg, ¿cuáles factores te generan mayor satisfacción en tus estudios?
+        <span class="note">Selecciona todas las que apliquen.</span>
+      </div>
+      <div class="options" id="q8-options">
+        <label class="option-label"><input type="checkbox" name="q8" value="reconocimiento"> Reconocimiento por mis logros académicos</label>
+        <label class="option-label"><input type="checkbox" name="q8" value="responsabilidad"> Responsabilidad y autonomía en proyectos</label>
+        <label class="option-label"><input type="checkbox" name="q8" value="crecimiento"> Crecimiento y desarrollo profesional</label>
+        <label class="option-label"><input type="checkbox" name="q8" value="logro"> Sentido de logro al completar materias/proyectos</label>
+        <label class="option-label"><input type="checkbox" name="q8" value="condiciones"> Condiciones físicas (aulas, laboratorios, wifi)</label>
+        <label class="option-label"><input type="checkbox" name="q8" value="docentes"> Relación con docentes y compañeros</label>
+      </div>
+      <div class="error-msg">Selecciona al menos una opción.</div>
+    </div>
+
+    <div class="q-card" data-required="true" id="q9-card">
+      <div class="q-num">Pregunta 9 <span class="req">*</span></div>
+      <div class="q-text">Según McClelland, ¿cuál de las siguientes necesidades te impulsa más a alcanzar tus metas académicas?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q9" value="logro"> Necesidad de logro (superar estándares, alcanzar metas)</label>
+        <label class="option-label"><input type="radio" name="q9" value="poder"> Necesidad de poder (liderar, influir en otros)</label>
+        <label class="option-label"><input type="radio" name="q9" value="afiliacion"> Necesidad de afiliación (pertenecer a grupos, relaciones)</label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <div class="q-card" data-required="true" id="q10-card">
+      <div class="q-num">Pregunta 10 <span class="req">*</span></div>
+      <div class="q-text">Según la Teoría de Vroom, ¿qué tan probable consideras que tu esfuerzo en la carrera llevará a un buen desempeño académico?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q10" value="muy_probable"> Muy probable — me esfuerzo y obtengo buenos resultados</label>
+        <label class="option-label"><input type="radio" name="q10" value="probable"> Probable — generalmente funciona, pero no siempre</label>
+        <label class="option-label"><input type="radio" name="q10" value="poco"> Poco probable — me esfuerzo pero los resultados varían mucho</label>
+        <label class="option-label"><input type="radio" name="q10" value="improbable"> No lo veo claro — hay muchos factores fuera de mi control</label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <!-- SECCIÓN 4: FACTORES DESMOTIVADORES -->
+    <div class="section-header">
+      <div class="tag">Sección 4</div>
+      <h2>Factores desmotivadores</h2>
+    </div>
+
+    <div class="q-card" data-required="true" id="q11-card">
+      <div class="q-num">Pregunta 11 <span class="req">*</span></div>
+      <div class="q-text">¿Cuál es el factor que más afecta tu motivación académica actualmente?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q11" value="economico"> Dificultades económicas</label>
+        <label class="option-label"><input type="radio" name="q11" value="metodologia"> Metodologías de enseñanza poco dinámicas</label>
+        <label class="option-label"><input type="radio" name="q11" value="practica"> Falta de relevancia práctica de los contenidos</label>
+        <label class="option-label"><input type="radio" name="q11" value="familia"> Problemas familiares o personales</label>
+        <label class="option-label"><input type="radio" name="q11" value="tiempo"> Falta de tiempo por trabajo</label>
+        <label class="option-label"><input type="radio" name="q11" value="ninguno"> Ninguno en particular</label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <div class="q-card" id="q12-card">
+      <div class="q-num">Pregunta 12</div>
+      <div class="q-text">¿Has pensado alguna vez en abandonar la carrera?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q12" value="si_seriamente"> Sí, seriamente</label>
+        <label class="option-label"><input type="radio" name="q12" value="si_ocasionalmente"> Sí, ocasionalmente</label>
+        <label class="option-label"><input type="radio" name="q12" value="no"> No, nunca</label>
+      </div>
+    </div>
+
+    <div class="q-card" id="q13-card">
+      <div class="q-num">Pregunta 13</div>
+      <div class="q-text">En una escala del 1 al 5, ¿qué tan satisfecho/a estás con las metodologías de enseñanza de tus docentes?
+        <span class="note">1 = Muy insatisfecho/a &nbsp;|&nbsp; 5 = Muy satisfecho/a</span>
+      </div>
+      <div class="scale-wrap">
+        <div class="scale-labels"><span>Muy insatisfecho/a</span><span>Muy satisfecho/a</span></div>
+        <div class="scale-btns" id="scale-q13">
+          <button type="button" class="scale-btn" data-val="1">1</button>
+          <button type="button" class="scale-btn" data-val="2">2</button>
+          <button type="button" class="scale-btn" data-val="3">3</button>
+          <button type="button" class="scale-btn" data-val="4">4</button>
+          <button type="button" class="scale-btn" data-val="5">5</button>
+        </div>
+      </div>
+      <input type="hidden" name="q13" id="q13-val">
+    </div>
+
+    <!-- SECCIÓN 5: MOTIVACIÓN Y TECNOLOGÍA -->
+    <div class="section-header">
+      <div class="tag">Sección 5</div>
+      <h2>Motivación y tecnología</h2>
+    </div>
+
+    <div class="q-card" data-required="true" id="q14-card">
+      <div class="q-num">Pregunta 14 <span class="req">*</span></div>
+      <div class="q-text">¿Cuál de las siguientes áreas de ISI te genera mayor motivación para desarrollarte profesionalmente?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q14" value="desarrollo"> Desarrollo de software</label>
+        <label class="option-label"><input type="radio" name="q14" value="innovacion"> Innovación tecnológica y emprendimiento</label>
+        <label class="option-label"><input type="radio" name="q14" value="gestion"> Gestión de proyectos TI</label>
+        <label class="option-label"><input type="radio" name="q14" value="transformacion"> Transformación digital de organizaciones</label>
+        <label class="option-label"><input type="radio" name="q14" value="ciberseguridad"> Ciberseguridad y redes</label>
+        <label class="option-label"><input type="radio" name="q14" value="datos"> Ciencia de datos e inteligencia artificial</label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <div class="q-card" data-required="true" id="q15-card">
+      <div class="q-num">Pregunta 15 <span class="req">*</span></div>
+      <div class="q-text">¿Consideras que las habilidades que adquieres en la carrera son suficientes para el mercado laboral actual?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q15" value="si"> Sí, completamente</label>
+        <label class="option-label"><input type="radio" name="q15" value="parcialmente"> Parcialmente, necesitamos más práctica</label>
+        <label class="option-label"><input type="radio" name="q15" value="no"> No, hay una brecha importante</label>
+        <label class="option-label"><input type="radio" name="q15" value="no_sabe"> Aún no lo puedo evaluar</label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <!-- SECCIÓN 6: PERSPECTIVAS Y RECOMENDACIONES -->
+    <div class="section-header">
+      <div class="tag">Sección 6</div>
+      <h2>Perspectivas y sugerencias</h2>
+    </div>
+
+    <div class="q-card" data-required="true" id="q16-card">
+      <div class="q-num">Pregunta 16 <span class="req">*</span></div>
+      <div class="q-text">¿Qué acción de parte de la universidad aumentaría más tu motivación?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q16" value="becas"> Más programas de becas y apoyo económico</label>
+        <label class="option-label"><input type="radio" name="q16" value="metodologias"> Modernizar las metodologías de enseñanza</label>
+        <label class="option-label"><input type="radio" name="q16" value="practicas"> Más oportunidades de práctica y vinculación laboral</label>
+        <label class="option-label"><input type="radio" name="q16" value="acompanamiento"> Fortalecer el acompañamiento y tutoría estudiantil</label>
+        <label class="option-label"><input type="radio" name="q16" value="infraestructura"> Mejorar la infraestructura tecnológica (laboratorios, internet)</label>
+      </div>
+      <div class="error-msg">Por favor selecciona una opción.</div>
+    </div>
+
+    <div class="q-card" id="q17-card">
+      <div class="q-num">Pregunta 17</div>
+      <div class="q-text">¿Tienes metas profesionales claras al terminar tu carrera?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q17" value="si_claras"> Sí, tengo metas muy claras</label>
+        <label class="option-label"><input type="radio" name="q17" value="algunas"> Tengo algunas ideas pero no están definidas</label>
+        <label class="option-label"><input type="radio" name="q17" value="no"> No, todavía no lo sé</label>
+      </div>
+    </div>
+
+    <div class="q-card" id="q18-card">
+      <div class="q-num">Pregunta 18</div>
+      <div class="q-text">¿De qué manera fortaleces tu motivación intrínseca para continuar estudiando?
+        <span class="note">Opcional — responde libremente.</span>
+      </div>
+      <textarea name="q18" placeholder="Escribe tu respuesta aquí..."></textarea>
+    </div>
+
+    <div class="q-card" id="q19-card">
+      <div class="q-num">Pregunta 19</div>
+      <div class="q-text">En general, ¿qué sugerencia le harías a la universidad o a los docentes para mejorar la motivación estudiantil?
+        <span class="note">Opcional — tu opinión es muy valiosa.</span>
+      </div>
+      <textarea name="q19" placeholder="Escribe tu sugerencia aquí..."></textarea>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-area">
+      <p style="font-size:0.8rem; color: var(--muted); margin-bottom:1.25rem; line-height:1.6;">
+        Esta encuesta es <strong>anónima</strong> y los datos serán utilizados únicamente con fines académicos.<br>
+        Los campos marcados con <span style="color:#D85A30">*</span> son obligatorios.
+      </p>
+      <button type="submit" class="btn-submit">Enviar encuesta →</button>
+    </div>
+
+  </form>
+
+  <!-- PANTALLA DE ÉXITO -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✓</div>
+    <h2>¡Gracias por participar!</h2>
+    <p>Tu respuesta ha sido registrada exitosamente. Tu aporte es fundamental para esta investigación sobre la motivación en los estudiantes de ISI de la UNAN-León CUR Jinotega.</p>
+    <p style="margin-top:1rem; font-size:0.8rem; color: var(--teal);">— Administración General · Junio 2026</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  UNAN-León · Centro Universitario Regional Jinotega · Ingeniería en Sistemas de Información<br>
+  Administración General · 2026 · Investigación de campo sobre La Motivación
+</div>
+
+<script>
+const form = document.getElementById('surveyForm');
+const progressBar = document.getElementById('progressBar');
+const progressPct = document.getElementById('progressPct');
+
+// Scale buttons
+document.querySelectorAll('[id^="scale-"]').forEach(scaleWrap => {
+  const id = scaleWrap.id.replace('scale-', '');
+  const hiddenInput = document.getElementById(id + '-val');
+  scaleWrap.querySelectorAll('.scale-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      scaleWrap.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (hiddenInput) hiddenInput.value = btn.dataset.val;
+      updateProgress();
+    });
+  });
+});
+
+// Progress tracking
+function updateProgress() {
+  const totalQ = 16;
+  let answered = 0;
+  // Radios
+  ['q1','q3','q4','q5','q7','q9','q10','q11','q12','q14','q15','q16','q17'].forEach(name => {
+    if (document.querySelector(`input[name="${name}"]:checked`)) answered++;
+  });
+  // Select
+  if (document.getElementById('q2') && document.getElementById('q2').value) answered++;
+  // Checkboxes
+  if (document.querySelectorAll('input[name="q8"]:checked').length > 0) answered++;
+  // Scale
+  if (document.getElementById('q6-val').value) answered++;
+
+  const pct = Math.round((answered / totalQ) * 100);
+  progressBar.style.width = pct + '%';
+  progressPct.textContent = pct + '%';
+}
+
+// Listen all changes
+form.addEventListener('change', updateProgress);
+
+// Validation
+function validateForm() {
+  let valid = true;
+  const requiredCards = document.querySelectorAll('.q-card[data-required="true"]');
+  requiredCards.forEach(card => {
+    card.classList.remove('error');
+    const id = card.id.replace('-card','');
+    // radio
+    const radio = card.querySelector(`input[type="radio"][name="${id}"]`);
+    const checked = card.querySelector(`input[type="radio"][name="${id}"]:checked`);
+    const checkboxes = card.querySelectorAll(`input[type="checkbox"][name="${id}"]`);
+    const checkChecked = card.querySelectorAll(`input[type="checkbox"][name="${id}"]:checked`);
+    const select = card.querySelector(`select[name="${id}"]`);
+
+    if (radio && !checked) { card.classList.add('error'); valid = false; }
+    else if (checkboxes.length > 0 && checkChecked.length === 0) { card.classList.add('error'); valid = false; }
+    else if (select && !select.value) { card.classList.add('error'); valid = false; }
+  });
+  return valid;
+}
+
+// Scroll to first error
+function scrollToError() {
+  const firstError = document.querySelector('.q-card.error');
+  if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Submit
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (!validateForm()) {
+    scrollToError();
+    return;
+  }
+  // Collect data
+  const data = new FormData(form);
+  const result = {};
+  data.forEach((v, k) => {
+    if (result[k]) {
+      result[k] = Array.isArray(result[k]) ? [...result[k], v] : [result[k], v];
+    } else {
+      result[k] = v;
+    }
+  });
+  console.log('Respuestas:', JSON.stringify(result, null, 2));
+  // Show success
+  document.getElementById('formSection').style.display = 'none';
+  document.getElementById('successScreen').style.display = 'block';
+  progressBar.style.width = '100%';
+  progressPct.textContent = '100%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
