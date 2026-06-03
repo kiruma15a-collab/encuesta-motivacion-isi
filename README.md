@@ -1,1 +1,0 @@
-# encuesta-motivacion-isi
